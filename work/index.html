@@ -110,9 +110,11 @@ input,select{font:16px Barlow,sans-serif;min-height:44px;padding:0 12px;border-r
 .lgpd{background:#ffe27a;color:#6b3a00;border-radius:6px;padding:1px 6px;font:700 14px "Barlow Condensed",sans-serif}
 .lgbar{display:inline-block;width:3px;height:16px;background:var(--red);vertical-align:middle}
 .lgtk{display:inline-block;width:36px;height:18px;border-radius:5px;vertical-align:middle;opacity:.6;background:#3a3d37 repeating-linear-gradient(135deg,rgba(255,255,255,.18) 0 1px,transparent 1px 6px)}
-.themerow{margin-top:18px;display:flex;flex-wrap:wrap;justify-content:flex-end;align-items:center;gap:10px;font-weight:600}
-.themerow select{min-width:170px;cursor:pointer}
-.themerow label[for=themeSel]{margin-left:8px}
+.themerow{margin-top:18px;display:flex;flex-wrap:nowrap;justify-content:flex-end;align-items:center;gap:10px;font-weight:600}
+.themerow select{flex:0 1 190px;min-width:0;cursor:pointer;padding:0 8px}
+.themerow label{white-space:nowrap}
+@media(max-width:600px){.themerow{gap:6px;font-size:14px}.themerow select{font-size:14px;flex-basis:0;flex-grow:1}#padSel{flex-grow:1.25}}
+.themerow label[for=themeSel]{margin-left:6px}
 .empty{padding:40px 16px;text-align:center;color:var(--mute);background:var(--paper);border-radius:14px;border:1px solid var(--line)}
 .note{font-size:13px;color:var(--mute);margin-top:18px}
 details{margin-top:14px;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:10px 14px}
@@ -369,7 +371,7 @@ textarea{width:100%;min-height:140px;font:13px/1.4 ui-monospace,monospace;border
    <dt><span class="lgtk"></span></dt><dd>Booked by someone else or not wanted (tap a shift to toggle)</dd>
   </dl>
  </section>
- <div class="themerow"><label for="padSel">Paddles</label><select id="padSel"><option value="fall-daily">Fall 2026 · Weekday</option><option value="fall-sat">Fall 2026 · Saturday</option><option value="fall-sun">Fall 2026 · Sunday</option><option value="winter-daily">Winter 2027 · Weekday</option><option value="winter-sat">Winter 2027 · Saturday</option><option value="winter-sun">Winter 2027 · Sunday</option></select><label for="themeSel">Theme</label><select id="themeSel"><option value="classic">Classic</option><option value="pixel">Pixel quest</option><option value="term">Terminal</option><option value="ott">Ottawa</option><option value="tyo">Tokyo</option><option value="ldn">London</option></select></div>
+ <div class="themerow"><label for="padSel">Paddles</label><select id="padSel"><option value="fall-daily">Fall Wkdy</option><option value="fall-sat">Fall Sat</option><option value="fall-sun">Fall Sun</option><option value="winter-daily">Winter Wkdy</option><option value="winter-sat">Winter Sat</option><option value="winter-sun">Winter Sun</option></select><label for="themeSel">Theme</label><select id="themeSel"><option value="classic">Classic</option><option value="pixel">Pixel quest</option><option value="term">Terminal</option><option value="ott">Ottawa</option><option value="tyo">Tokyo</option><option value="ldn">London</option></select></div>
 </main>
 
 <script>
