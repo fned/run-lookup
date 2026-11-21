@@ -45,9 +45,10 @@ input,select{font:16px Barlow,sans-serif;min-height:44px;padding:0 12px;border-r
 .btns button{flex:1 1 auto;padding:0 clamp(8px,2.5vw,18px);white-space:nowrap;font-size:clamp(13px,3.6vw,16px)}
 .thumbs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
 .thumbs img{height:64px;border-radius:6px;border:1px solid var(--line)}
-.status{min-height:24px;color:var(--mute);font-size:15px}
+.status{margin:8px 0 0;color:var(--mute);font-size:15px}
+.status:empty{display:none}
 .status.err{color:var(--red)}
-.sum{display:flex;flex-wrap:wrap;gap:8px 22px;margin:4px 0 14px;font-size:15px;color:var(--mute)}
+.sum{display:flex;flex-wrap:wrap;gap:8px 22px;margin:14px 0 12px;font-size:15px;color:var(--mute)}
 .sum strong{font:700 24px/1 "Barlow Condensed",sans-serif;color:var(--ink);margin-right:4px}
 .list{display:grid;gap:14px}
 .shift{background:var(--paper);border:1px solid var(--line);border-radius:14px;overflow:hidden}
@@ -368,7 +369,7 @@ textarea{width:100%;min-height:140px;font:13px/1.4 ui-monospace,monospace;border
    <dt><span class="lgtk"></span></dt><dd>Booked by someone else or not wanted (tap a shift to toggle)</dd>
   </dl>
  </section>
- <div class="themerow"><label for="padSel">Paddles</label><select id="padSel"><option value="fall-daily">Fall 2026 · Weekday</option><option value="fall-sat">Fall 2026 · Saturday</option><option value="fall-sun">Fall 2026 · Sunday</option><option value="winter-daily">Winter 2027 · Weekday</option><option value="winter-sat">Winter 2027 · Saturday</option><option value="winter-sun">Winter 2027 · Sunday</option></select><label for="themeSel">Theme</label><select id="themeSel"><option value="ott">Ottawa</option><option value="pixel">Pixel quest</option><option value="term">Terminal</option><option value="classic">Classic</option><option value="ldn">London</option><option value="tyo">Tokyo</option></select></div>
+ <div class="themerow"><label for="padSel">Paddles</label><select id="padSel"><option value="fall-daily">Fall 2026 · Weekday</option><option value="fall-sat">Fall 2026 · Saturday</option><option value="fall-sun">Fall 2026 · Sunday</option><option value="winter-daily">Winter 2027 · Weekday</option><option value="winter-sat">Winter 2027 · Saturday</option><option value="winter-sun">Winter 2027 · Sunday</option></select><label for="themeSel">Theme</label><select id="themeSel"><option value="classic">Classic</option><option value="pixel">Pixel quest</option><option value="term">Terminal</option><option value="ott">Ottawa</option><option value="tyo">Tokyo</option><option value="ldn">London</option></select></div>
 </main>
 
 <script>
@@ -446,7 +447,7 @@ function render(){
  const k='on';
  rows.sort((a,b)=>k==='paddle'?(pkey(a.pads[0]||'',b.pads[0]||'')||(a.on??1e9)-(b.on??1e9)):k==='plat'?(b.plat-a.plat):((a[k]??1e9)-(b[k]??1e9)));
  const open=rows.filter(r=>!picked.has(r.id)).length;
- $('sum').innerHTML=total?`<span><strong>${open}</strong>open</span><span><strong>${rows.length-open}</strong>booked / don't want</span><span style="margin-left:auto;font-size:14px">Tap a shift when it's booked or you don't want</span>`:'';
+ $('sum').innerHTML=total?`<span><strong>${open}</strong>open</span><span><strong>${rows.length-open}</strong>booked / don't want</span><span style="margin-left:auto;font-size:14px">Tap shift to exclude</span>`:'';
  $('list').innerHTML=rows.length?rows.map(r=>{const on=picked.has(r.id);
   const pt=r.s.total_plat?esc(String(r.s.total_plat).replace(/\s+/g,'')):fmt(r.plat);
   const segs=r.work.map(p=>{const bn=String(p.block||'').replace(/\D/g,'').replace(/^0+/,''),rn=String(p.run||'').replace(/\D/g,'').replace(/^0+/,'');if(bn==='109')return rn==='102'?'Employee shuttle':'Extra';const rt=routesFor(p);return rt&&rt.length?countRuns(rt):`${esc(p.on_time||'—')}–${esc(p.off_time||'—')}`});
@@ -525,7 +526,7 @@ $('list').addEventListener('keydown',e=>{const c=e.target.closest('.sc');if(c&&(
 const THEMES=[['classic','Classic'],['pixel','Pixel quest'],['term','Terminal'],['ldn','London'],['tyo','Tokyo'],['ott','Ottawa']];
 const setTheme=t=>{const r=document.documentElement;THEMES.forEach(([k])=>k!=='classic'&&r.classList.toggle(k,k===t));$('themeSel').value=t;try{localStorage.setItem('workAvail.theme',t)}catch(e){}};
 $('themeSel').addEventListener('change',e=>setTheme(e.target.value));
-{let t='ott';try{const s=localStorage.getItem('workAvail.theme');if(THEMES.some(x=>x[0]===s))t=s}catch(e){}setTheme(t)}
+{let t='classic';try{const s=localStorage.getItem('workAvail.theme');if(THEMES.some(x=>x[0]===s))t=s}catch(e){}setTheme(t)}
 $('padSel').addEventListener('change',e=>{useSet(e.target.value);save()});
 $('clearAll').addEventListener('click',()=>{shifts=[];picked=new Set();save();render();setStatus('List cleared.')});
 
