@@ -1,7 +1,7 @@
-// Work Available — offline cache.
+// Spare — offline cache.
 // First visit (online) saves the page, the paddles, the reader and its English data.
 // After that the app opens and reads images with no internet.
-const CACHE='work-available-v2';
+const CACHE='spare-v3';
 const LOCAL=['./','index.html','paddles.json','eng.traineddata.gz','manifest.webmanifest','icon-192.png','icon-512.png','apple-touch-icon.png'];
 const CDN=[
  'https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js',

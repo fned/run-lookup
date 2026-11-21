@@ -1,6 +1,6 @@
-# Work Available
+# Spare
 
-Lives in the `work/` folder of the run-lookup repo, next to Run Lookup. Nothing outside this folder is touched.
+Spare lives in the `work/` folder of the run-lookup repo, next to Run Lookup. Nothing outside this folder is touched.
 
 - Site: `https://fned.github.io/run-lookup/work/`
 - Reads a screenshot of the open-work sheet on the phone (Tesseract OCR) and lists every shift.
